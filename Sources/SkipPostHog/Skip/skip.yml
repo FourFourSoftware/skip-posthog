@@ -12,5 +12,5 @@ build:
   contents:
     - block: 'dependencies'
       contents:
-        - 'implementation("com.posthog:posthog-android:3.+")'
+        - 'implementation("com.posthog:posthog-android:3.72.2")'
 
