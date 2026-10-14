@@ -817,6 +817,73 @@ public class PostHogConfig {
         }
     }
 
+    /// Capture replay frames as masked screenshots instead of wireframes.
+    /// Required for SwiftUI (iOS) and Jetpack Compose (Android), which the
+    /// wireframe recorder cannot capture.
+    public var sessionReplayScreenshotMode: Bool {
+        get {
+            #if SKIP
+            self.platformValue.sessionReplayConfig.screenshot
+            #elseif os(iOS)
+            self.platformValue.sessionReplayConfig.screenshotMode
+            #else
+            false
+            #endif
+        }
+
+        set {
+            #if SKIP
+            self.platformValue.sessionReplayConfig.screenshot = newValue
+            #elseif os(iOS)
+            self.platformValue.sessionReplayConfig.screenshotMode = newValue
+            #endif
+        }
+    }
+
+    /// Masks all text in replays. On iOS this covers every SwiftUI `Text` and
+    /// button label, not just inputs. Secure and sensitive-content-type fields
+    /// stay masked when off.
+    public var sessionReplayMaskAllTextInputs: Bool {
+        get {
+            #if SKIP
+            self.platformValue.sessionReplayConfig.maskAllTextInputs
+            #elseif os(iOS)
+            self.platformValue.sessionReplayConfig.maskAllTextInputs
+            #else
+            true
+            #endif
+        }
+
+        set {
+            #if SKIP
+            self.platformValue.sessionReplayConfig.maskAllTextInputs = newValue
+            #elseif os(iOS)
+            self.platformValue.sessionReplayConfig.maskAllTextInputs = newValue
+            #endif
+        }
+    }
+
+    /// Masks all images in replays.
+    public var sessionReplayMaskAllImages: Bool {
+        get {
+            #if SKIP
+            self.platformValue.sessionReplayConfig.maskAllImages
+            #elseif os(iOS)
+            self.platformValue.sessionReplayConfig.maskAllImages
+            #else
+            true
+            #endif
+        }
+
+        set {
+            #if SKIP
+            self.platformValue.sessionReplayConfig.maskAllImages = newValue
+            #elseif os(iOS)
+            self.platformValue.sessionReplayConfig.maskAllImages = newValue
+            #endif
+        }
+    }
+
     public var setDefaultPersonProperties: Bool {
         get {
             #if !SKIP
