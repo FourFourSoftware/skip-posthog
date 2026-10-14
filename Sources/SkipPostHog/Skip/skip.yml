@@ -1,7 +1,11 @@
 # Configuration file for Skip (https://skip.dev) project
 #
 # Kotlin dependencies and Gradle build options for this module can be configured here
+# FourFourSoftware fork (Skip 1.9): explicit `mode: 'transpiled'` so native
+# Skip Fuse apps consume this module via bridging, matching our
+# skip-firebase / skip-crisp / skip-superwall forks.
 skip:
+  mode: 'transpiled'
   bridging: true
 
 build:

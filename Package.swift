@@ -27,10 +27,12 @@ let package = Package(
     ]
 )
 
+// Skip 1.9: bridge via skip-fuse (not skip-bridge), matching our
+// skip-crisp / skip-superwall forks.
 if Context.environment["SKIP_BRIDGE"] ?? "0" != "0" {
-    package.dependencies += [.package(url: "https://source.skip.tools/skip-bridge.git", "0.0.0"..<"2.0.0")]
+    package.dependencies += [.package(url: "https://source.skip.tools/skip-fuse.git", "0.0.0"..<"2.0.0")]
     package.targets.forEach({ target in
-        target.dependencies += [.product(name: "SkipBridge", package: "skip-bridge")]
+        target.dependencies += [.product(name: "SkipFuse", package: "skip-fuse")]
     })
     // all library types must be dynamic to support bridging
     package.products = package.products.map({ product in
